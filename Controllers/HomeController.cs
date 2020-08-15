@@ -19,12 +19,29 @@ namespace WeddingPlanner.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            User user = HttpContext.Session.Get<User>("user");
-            if (user == null)
+            return RedirectToAction("Weddings");
+        }
+
+        [HttpGet("weddings")]
+        public IActionResult Weddings()
+        {
+            if (!CheckUser())
             {
                 return RedirectToAction("Login", "User");
             }
-            return View(user);
+            return View("Weddings");
+        }
+
+        [HttpGet("weddings/new")]
+        public ViewResult NewWedding()
+        {
+            return View("NewWedding");
+        }
+
+        private bool CheckUser()
+        {
+            ViewData["User"] = HttpContext.Session.Get<User>("user");
+            return ViewData["User"] != null;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,6 +35,10 @@ namespace WeddingPlanner.Models
         [DataType(DataType.Password)]
         [Display(Name="Confirm Password")]
         public string Confirm { get ; set; }
+
+        public List<Wedding> WeddingsCreated { get; set; }
+
+        public List<Rsvp> Rsvps { get; set; }
 
         public DateTime CreatedAt { get ; set; } = DateTime.Now;
         public DateTime UpdatedAt { get ; set; } = DateTime.Now;
