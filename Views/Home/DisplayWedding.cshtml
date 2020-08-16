@@ -1,0 +1,16 @@
+@model Wedding
+
+<h1>@Model.WedderOne and @Model.WedderTwo's Wedding</h1>
+<h3>Date: @(((DateTime) Model.Date).ToString("MMMM dd, yyyy"))</h3>
+<h3>Address: @Model.Address</h3>
+<h3>Guests (@Model.Attendees.Count() total):</h3>
+<ul>
+  @foreach (var rsvp in @Model.Attendees)
+  {
+      <li>@rsvp.Attendee.FirstName @rsvp.Attendee.LastName</li>
+  }
+  @if (Model.Attendees.Count() == 0)
+  {
+    <li>No guests have RSVPed yet</li>
+  }
+</ul>

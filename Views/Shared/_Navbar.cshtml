@@ -13,10 +13,10 @@
     </div>
 
 
-    @if (ViewData["User"] != null)
+    @if (ViewData["user"] != null)
     {
       <div id="nav-info">
-        <p>Welcome, @(((User) ViewData["User"]).FirstName)</p>
+        <p>Welcome, @(((User) ViewData["user"]).FirstName)</p>
         <a class="btn btn-outline-warning" asp-action="Logout" asp-controller="User">
           Logout
         </a>

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeddingPlanner.Models;
 
 namespace WeddingPlanner.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200816022130_WeddingMigration")]
+    partial class WeddingMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,12 +43,12 @@ namespace WeddingPlanner.Migrations
 
                     b.HasIndex("WeddingId");
 
-                    b.ToTable("Rsvps");
+                    b.ToTable("Rsvp");
                 });
 
             modelBuilder.Entity("WeddingPlanner.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -72,7 +74,7 @@ namespace WeddingPlanner.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
@@ -90,8 +92,7 @@ namespace WeddingPlanner.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("Date")
-                        .IsRequired()
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -112,7 +113,7 @@ namespace WeddingPlanner.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Weddings");
+                    b.ToTable("Wedding");
                 });
 
             modelBuilder.Entity("WeddingPlanner.Models.Rsvp", b =>

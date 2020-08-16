@@ -1,2 +1,53 @@
+@model WeddingsWrapper
 
 <h1>Weddings</h1>
+
+<table class="table table-hover">
+  <thead>
+    <th>Wedding</th>
+    <th>Date</th>
+    <th>Guest</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    @foreach (Wedding wedding in @Model.AllWeddings)
+    {
+      <tr>
+        <td>
+          <a asp-action="DisplayWedding" asp-controller="Home" asp-route-id="@wedding.WeddingId">
+            @wedding.WedderOne & @wedding.WedderTwo
+          </a>
+        </td>
+        <td>@(((DateTime) wedding.Date).ToString("MMM dd, yyyy"))</td>
+        <td>@wedding.Attendees.Count()</td>
+        @if (@wedding.UserId == @Model.User.UserId)
+        {
+          <td>
+            <a class="btn btn-danger" asp-action="DeleteWedding"
+              asp-controller="Home" asp-route-id="@wedding.WeddingId">
+              Delete
+            </a>
+          </td>
+        }
+        else if (@wedding.Attendees.Any(w => w.UserId == @Model.User.UserId))
+        {
+          <td>
+            <a class="btn btn-warning" asp-action="ToggleRsvp"
+              asp-controller="Home" asp-route-id="@wedding.WeddingId">
+              Cancel RSVP
+            </a>
+          </td>
+        }
+        else
+        {
+          <td>
+            <a class="btn btn-primary" asp-action="ToggleRsvp"
+              asp-controller="Home" asp-route-id="@wedding.WeddingId">
+              RSVP
+            </a>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

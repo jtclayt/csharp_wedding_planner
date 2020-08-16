@@ -10,11 +10,11 @@ namespace WeddingPlanner.Controllers
 {
     public class UserController : Controller
     {
-        private Context _context;
+        private Context _db;
 
         public UserController(Context context)
         {
-            _context = context;
+            _db = context;
         }
 
         [HttpGet("users/register")]
@@ -28,12 +28,12 @@ namespace WeddingPlanner.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!_context.Users.Any(u => u.Email == newUser.Email))
+                if (!_db.Users.Any(u => u.Email == newUser.Email))
                 {
                     PasswordHasher<User> hasher = new PasswordHasher<User>();
                     newUser.Password = hasher.HashPassword(newUser, newUser.Password);
-                    _context.Users.Add(newUser);
-                    _context.SaveChanges();
+                    _db.Users.Add(newUser);
+                    _db.SaveChanges();
                     HttpContext.Session.Set<User>("user", newUser);
                     return RedirectToAction("Index", "Home");
                 }
@@ -54,7 +54,7 @@ namespace WeddingPlanner.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = _context.Users
+                User user = _db.Users
                     .FirstOrDefault(u => u.Email == logUser.Email);
                 if (user != null)
                 {

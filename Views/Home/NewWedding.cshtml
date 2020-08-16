@@ -1,7 +1,7 @@
 @model Wedding
 
 <div class="row">
-  <form asp-action="CreateWedding" asp-controller="Home">
+  <form class="col-sm-8" asp-action="CreateWedding" asp-controller="Home" method="POST">
     <h1>Plan Your Wedding</h1>
     <span class="text-danger" asp-validation-for="WedderOne"></span>
     <div class="input-group mb-2">
@@ -10,5 +10,31 @@
       </div>
       <input class="form-control" asp-for="WedderOne">
     </div>
+
+    <span class="text-danger" asp-validation-for="WedderTwo"></span>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <label class="input-group-text" asp-for="WedderTwo"></label>
+      </div>
+      <input class="form-control" asp-for="WedderTwo">
+    </div>
+
+    <span class="text-danger" asp-validation-for="Date"></span>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <label class="input-group-text" asp-for="Date"></label>
+      </div>
+      <input class="form-control" asp-for="Date">
+    </div>
+
+    <span class="text-danger" asp-validation-for="Address"></span>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <label class="input-group-text" asp-for="Address"></label>
+      </div>
+      <input class="form-control" asp-for="Address">
+    </div>
+
+    <button class="btn btn-primary" type="submit">Create Wedding!</button>
   </form>
 </div>
